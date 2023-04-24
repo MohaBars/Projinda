@@ -1,0 +1,190 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #4f0043;
+}
+
+.container{
+    position: relative;
+    width: 400px;
+    height: 60px;
+    background: #fff;
+    padding: 28px 32px;
+    overflow: hidden;
+    border-radius: 18px;
+    font-family: "Courier New", monospace;
+    transition: 0.5s ease-in;
+}
+
+/* styling the search box */
+.search-box{
+    width: 100%;
+    height: min-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -18px;
+}
+
+.search-box input{
+    color: #4f0043;
+    width: 80%;
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.search-box input::placeholder{
+    font-size: 20px;
+    font-weight: 500;
+    color: #4f0043;
+    text-transform: capitalize;
+}
+
+.search-box button{
+    cursor: pointer;
+    width: 50px;
+    height: 40px;
+    background: #fff;
+    border-radius: 18px;
+    font-size: 22px;
+    margin-right: -24px;
+}
+
+/* Styling for when user hovers their mouse over button */
+.search-box button:hover{
+    color: #fff;
+    background: #4f0043;
+}
+
+.weather-box {
+    text-align: center;
+}
+
+.weather-box img{
+    width: 60%;
+    margin-top: 30px;
+}
+
+.weather-box .temp{
+    position: relative;
+    color: #4f0043;
+    font-weight: 500;
+
+    /* Using rem here because we want the layout to be responsive and rem is relative to the root element's font size that is in px. In this context, 4rem will multiply the original font size of the root element by 4*/
+    font-size: 4rem;
+    margin-top: 30px;
+
+    /* -20 will move it 20 pixels to the left of its original position. */
+    margin-left: -20;
+}
+
+.weather-box .temp span{
+    position: absolute;
+    margin-left: 4px;
+    font-size: 1.5rem;
+}
+
+.weather-box .description{
+    color: #4f0043;
+    font: 24px;
+    font-weight: 500;
+}
+
+.weather-details{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.weather-details .humidity, .weather-details .wind, .weather-details .pressure{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 100px;
+}
+
+.weather-details .humidity{
+    padding-left: 20px;
+    justify-content: flex-start;
+}
+
+.weather-details .wind{
+    padding-left: 20px;
+    justify-content: flex-start;
+}
+
+.weather-details .pressure{
+    padding-left: 20px;
+    justify-content: flex-start;
+}
+
+.weather-details i{
+    color: #4f0043;
+    font-size: 24px;
+    margin-right: 10px;
+    margin-top: 10;
+}
+
+.weather-details span{
+    color: #4f0043;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.weather-details p{
+    color: #4f0043;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.not-found{
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    scale: 0;
+    opacity: 0;
+    display: none;
+}
+
+/* The image's size has to be set like this or else it would be too big */
+.not-found img{
+    width: 70%;
+    /* height: 100%; */
+}
+
+.not-found p{
+    color: #4f0043;
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.weather-box, .weather-details{
+    scale: 0;
+    opacity: 0;
+}
+
+.fade-in{
+    animation: 1s fadeIn forwards;
+    animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+

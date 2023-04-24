@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+        <!-- To make the code maintainable, the styling will be in a seperate css file -->
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- The weather icons file was provided by Erik Flowers on github. -->
+        <link rel="stylesheet" href="css/weather-icons.min.css">
+        <title>Projinda23</title>
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div class="search-box">
+                <input type="text" placeholder="Type your location">
+                <button class="button wi wi-direction-right">
+                </button>
+            </div>
+
+            <!-- Create a case where the location is not found -->
+            <div class="not-found">
+                <img src="images/Error.png">
+                <p>Oops! Location was not found :/</p>
+            </div>
+
+            <div class="weather-box">
+                <img src="">
+                <p class="temp"></p>
+                <p class="description"></p>
+            </div>
+
+            <div class="weather-details">
+                <div class="humidity">
+                    <i class="wi wi-humidity"></i>
+                    <div class="text">
+                        <span></span>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+
+                <div class="wind">
+                    <i class="wi wi-strong-wind"></i>
+                    <div class="text">
+                        <span></span>
+                        <p>Wind</p>
+                    </div>
+                </div>
+
+                <div class="pressure">
+                    <i class="wi wi-barometer"></i>
+                    <div class="text">
+                        <span></span>
+                        <p>Pressure</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        
+    </body>
+</html>
