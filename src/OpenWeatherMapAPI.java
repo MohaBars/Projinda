@@ -46,7 +46,8 @@ public class OpenWeatherMapAPI {
                     apiWeather = matcher.group(2); // Will be the description of the weather
                 } 
             } else {
-                System.out.println("Error: " + responseCode);
+                //Modified to converts the error into a string
+                apiWeather = "Error";
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
