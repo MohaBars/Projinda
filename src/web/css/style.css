@@ -69,36 +69,13 @@ body{
 
 .weather-box {
     text-align: center;
+    z-index: 2;
 }
-
-.weather-box img{
-    width: 60%;
-    margin-top: 30px;
-}
-
-/* TODO: add temp to the response in java to style it here */
-/* .weather-box .temp{
-    position: relative;
-    color: #4f0043;
-    font-weight: 500;
-
-    /* Using rem here because we want the layout to be responsive and rem is relative to the root element's font size that is in px. In this context, 4rem will multiply the original font size of the root element by 4*/
-    /* font-size: 4rem;
-    margin-top: 30px; */
-
-    /* -20 will move it 20 pixels to the left of its original position. */
-    /* margin-left: -20;
-} */
-
-/* .weather-box .temp span{
-    position: absolute;
-    margin-left: 4px;
-    font-size: 1.5rem;
-} */
 
 .weather-box .description{
+    margin-top: 100px;
     color: #4f0043;
-    font: 56px;
+    font-size: 56px;
     font-weight: 500;
 }
 
@@ -141,3 +118,186 @@ body{
     }
 }
 
+/* Animation for clear weather */
+.sun-container {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #87ceeb; /* Sky blue color */
+    overflow: hidden;
+    z-index: -1;
+}
+
+.sun {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #ffd700; /* Yellow color */
+    animation: sunAnimation 3s linear infinite;
+}
+
+@keyframes sunAnimation {
+    0% {
+        transform: translate(-50%, 0%) rotate(0deg);
+    }
+    50% {
+        transform: translate(-50%, -20%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, 0%) rotate(0deg);
+    }
+}
+
+/* Clouds animation */
+.clouds-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #87ceeb;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.cloud1 {
+    position: relative;
+    top: 50px;
+    height: 100px;
+    width: 320px;
+    background: #e6e6e6;
+    border-radius: 100px;
+}
+
+.cloud2 {
+    position: fixed;
+    top: 50px;
+    height: 100px;
+    width: 400px;
+    background: #e6e6e6;
+    border-radius: 100px;
+    right: 0;
+}
+
+.cloud1::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 40px;
+    width: 110px;
+    height: 110px;
+    background: #e6e6e6;
+    border-radius: 50%;
+    box-shadow: 90px 0 0 30px #e6e6e6;
+}
+
+.cloud2::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 40px;
+    width: 110px;
+    height: 110px;
+    background: #e6e6e6;
+    border-radius: 50%;
+    box-shadow: 90px 0 0 30px #e6e6e6;
+}
+
+.snow1 {
+    position: relative;
+    display: none;
+    z-index: 1;
+}
+
+.snow1 span {
+    position: relative;
+    bottom: 10px;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    margin: 0 2px;
+    border-radius: 50%;
+    animation: animate 5s linear infinite;
+    animation-duration: calc(15s / var(--i));
+    transform-origin: bottom;
+}
+
+.rain1 {
+    position: relative;
+    display: none;
+    z-index: 1;
+}
+
+.rain1 span {
+    position: relative;
+    bottom: 10px;
+    width: 2px;
+    height: 10px;
+    background: #0a9dff;
+    margin: 0 2px;
+    left: 50px;
+    border-radius: 0;
+    animation: animate 5s linear infinite;
+    animation-duration: calc(15s / var(--i));
+    transform-origin: bottom;
+}
+
+.snow2 {
+    position: fixed;
+    display: none;
+    z-index: 1;
+    right: 0;
+    margin-right: 70px;
+}
+
+.snow2 span {
+    position: relative;
+    bottom: 10px;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    margin: 0 2px;
+    border-radius: 50%;
+    animation: animate 5s linear infinite;
+    animation-duration: calc(15s / var(--i));
+    transform-origin: bottom;
+}
+
+.rain2 {
+    position: fixed;
+    display: none;
+    z-index: 1;
+    right: 0;
+    margin-right: 150px;
+}
+
+.rain2 span {
+    position: relative;
+    bottom: 10px;
+    width: 2px;
+    height: 10px;
+    background: #0a9dff;
+    margin: 0 2px;
+    left: 50px;
+    border-radius: 0;
+    animation: animate 5s linear infinite;
+    animation-duration: calc(15s / var(--i));
+    transform-origin: bottom;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    70% {
+        transform: translateY(100vh) scale(1);
+    }
+    100% {
+        transform: translateY(100vh) scale(0);
+    }
+}
