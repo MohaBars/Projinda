@@ -41,33 +41,46 @@ function searchWeather() {
             notFound.style.display = 'none';
             notFound.classList.remove('fadeIn');
 
-            const image = document.querySelector('.weather-box img');
             const description = document.querySelector('.weather-box .description');
 
             //switch case to check the response
             switch (true){
-                case data.includes('rain'):
-                    image.src = 'images/rain.jpeg';
+                case data.includes('rain' || 'drizzle'):
+                    var cloudsContainer = document.querySelector('.clouds-container');
+                    var rain1 = cloudsContainer.querySelector('.rain1');
+                    var rain2 = cloudsContainer.querySelector('.rain2');
+                    cloudsContainer.style.display = 'block';
+                    rain1.style.display = 'flex';
+                    rain2.style.display = 'flex';
                     break;
 
                 case data.includes('clouds'):
-                    image.src = 'images/rain.jpeg';
+                    var cloudsContainer = document.querySelector('.clouds-container');
+                    cloudsContainer.style.display = 'block';
                     break;
 
                 case data.includes('snow'):
-                    image.src = 'images/rain.jpeg';
+                    var cloudsContainer = document.querySelector('.clouds-container');
+                    var snow1 = cloudsContainer.querySelector('.snow1');
+                    var snow2 = cloudsContainer.querySelector('.snow2');
+                    cloudsContainer.style.display = 'block';
+                    snow1.style.display = 'flex';
+                    snow2.style.display = 'flex';
                     break;
 
                 case data.includes('clear'):
-                    image.src = 'images/rain.jpeg';
+                    var sunContainer = document.querySelector('.sun-container');
+                    sunContainer.style.display = 'block';
                     break;
 
                 default:
-                    image.src = '';
+                    
             }
 
-            description.innerHTML = data;
+            //This will capitalize the first letter
+            var condition = data.charAt(0).toUpperCase() + data.slice(1);
 
+            description.innerHTML = condition;
             weatherBox.style.display = '';
             weatherBox.classList.add('fadeIn');
             container.style.height = '700px';
