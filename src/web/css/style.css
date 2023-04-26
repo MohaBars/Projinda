@@ -76,76 +76,29 @@ body{
     margin-top: 30px;
 }
 
-.weather-box .temp{
+/* TODO: add temp to the response in java to style it here */
+/* .weather-box .temp{
     position: relative;
     color: #4f0043;
     font-weight: 500;
 
     /* Using rem here because we want the layout to be responsive and rem is relative to the root element's font size that is in px. In this context, 4rem will multiply the original font size of the root element by 4*/
-    font-size: 4rem;
-    margin-top: 30px;
+    /* font-size: 4rem;
+    margin-top: 30px; */
 
     /* -20 will move it 20 pixels to the left of its original position. */
-    margin-left: -20;
-}
+    /* margin-left: -20;
+} */
 
-.weather-box .temp span{
+/* .weather-box .temp span{
     position: absolute;
     margin-left: 4px;
     font-size: 1.5rem;
-}
+} */
 
 .weather-box .description{
     color: #4f0043;
-    font: 24px;
-    font-weight: 500;
-}
-
-.weather-details{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-}
-
-.weather-details .humidity, .weather-details .wind, .weather-details .pressure{
-    display: flex;
-    align-items: center;
-    width: 50%;
-    height: 100px;
-}
-
-.weather-details .humidity{
-    padding-left: 20px;
-    justify-content: flex-start;
-}
-
-.weather-details .wind{
-    padding-left: 20px;
-    justify-content: flex-start;
-}
-
-.weather-details .pressure{
-    padding-left: 20px;
-    justify-content: flex-start;
-}
-
-.weather-details i{
-    color: #4f0043;
-    font-size: 24px;
-    margin-right: 10px;
-    margin-top: 10;
-}
-
-.weather-details span{
-    color: #4f0043;
-    font-size: 24px;
-    font-weight: 500;
-}
-
-.weather-details p{
-    color: #4f0043;
-    font-size: 24px;
+    font: 56px;
     font-weight: 500;
 }
 
@@ -161,7 +114,7 @@ body{
 /* The image's size has to be set like this or else it would be too big */
 .not-found img{
     width: 70%;
-    /* height: 100%; */
+    height: 100%;
 }
 
 .not-found p{
@@ -171,12 +124,12 @@ body{
     margin-top: 12px;
 }
 
-.weather-box, .weather-details{
+.weather-box{
     scale: 0;
     opacity: 0;
 }
 
-.fade-in{
+.fadeIn{
     animation: 1s fadeIn forwards;
     animation-delay: 1s;
 }
