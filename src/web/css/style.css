@@ -107,8 +107,8 @@ body{
 }
 
 .fadeIn{
-    animation: 1s fadeIn forwards;
-    animation-delay: 1s;
+    animation: 0.5s fadeIn forwards;
+    animation-delay: 0.5s;
 }
 
 @keyframes fadeIn {
