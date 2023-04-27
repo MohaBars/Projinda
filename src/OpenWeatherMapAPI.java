@@ -4,8 +4,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.net.ProtocolException;
-
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,10 +17,9 @@ import java.util.regex.Pattern;
  */
 public class OpenWeatherMapAPI {
     private String apiKey = "8257206a615b0b55accb2cf9cce30db0";
-    private String apiWeather; 
+    private String[] apiInformation = new String[2]; 
 
-    public String weatherInformation(String city) {
-        
+    public String[] weatherInformation(String city) {
         //This is the standard call method for openweather
         String url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
 
@@ -43,11 +44,17 @@ public class OpenWeatherMapAPI {
                 Pattern pattern = Pattern.compile("\"main\":\"(.+?)\",\"description\":\"(.+?)\"");
                 Matcher matcher = pattern.matcher(response.toString());
                 if (matcher.find()) {
-                    apiWeather = matcher.group(2); // Will be the description of the weather
+                    // This will be the description of the weather
+                    apiInformation[0] = matcher.group(2);
+                    
+                    //Extract local time of the city
+                    long unixTime = Long.parseLong(response.toString().split("\"dt\":")[1].split(",")[0]);
+                    //This will be the desciption of the time
+                    apiInformation[1] = convertUnixToTime(unixTime, response.toString().split("\"timezone\":")[1].split(",")[0]);
                 } 
             } else {
                 //Modified to converts the error into a string
-                apiWeather = "Error";
+                apiInformation[0] = "Error";
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -56,6 +63,13 @@ public class OpenWeatherMapAPI {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return apiWeather;
+        return apiInformation;
+    }
+
+    private String convertUnixToTime(long unixTime, String timeZone) {
+        Date date = new Date(unixTime * 1000L); // Convert Unix time to Java Date object
+        SimpleDateFormat sdf = new SimpleDateFormat("HH"); // Use "HH" format to get hour in 24-hour clock format
+        sdf.setTimeZone(TimeZone.getTimeZone(timeZone)); // Set the time zone
+        return sdf.format(date); // Return the hour part of the time as a string
     }
 }

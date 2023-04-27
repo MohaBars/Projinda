@@ -43,12 +43,18 @@ public class WeatherHandler implements HttpHandler {
             }
         }
 
-        OpenWeatherMapAPI weather = new OpenWeatherMapAPI();
-        String result = weather.weatherInformation(city);
+        OpenWeatherMapAPI openWeatherMapAPI = new OpenWeatherMapAPI();
+        String[] result = openWeatherMapAPI.weatherInformation(city);
+        String weather = result[0];
+
+        int timeInt = Integer.parseInt(result[1]); // incorrect time by 2 hours.
+        timeInt += 2; //Time in hours as an int between 0-23
+
         t.getResponseHeaders().set("Content-Type", "text/plain");
-        t.sendResponseHeaders(200, result.getBytes().length);
+        t.sendResponseHeaders(200, weather.getBytes().length);
         OutputStream os = t.getResponseBody();
-        os.write(result.getBytes());
+        os.write(weather.getBytes());
         os.close();
     }
 }
+
