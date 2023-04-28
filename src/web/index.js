@@ -4,6 +4,10 @@ const searchBox = document.querySelector('.search-box button');
 const notFound = document.querySelector('.not-found');
 const weatherBox = document.querySelector('.weather-box');
 const inputField = document.querySelector('.search-box input');
+const playlistButton = document.querySelector('.container .playlist');
+const playlistCover = document.querySelector('.container .playlist img');
+let link = "http://google.com";
+let coverLink;
 
 //If search button is clicked, call the function searchWethaer
 searchBox.addEventListener('click', searchWeather);
@@ -77,12 +81,37 @@ function searchWeather() {
                     
             }
 
+            //convert the data into an array
+            var arr = parse(data);
+
+            //change visibility of the playlist button
+            playlistButton.style.display = 'inline-block';
+            //change the variable coverLink to contain the actual link
+            // coverLink = arr[2];
+            //change cover image of the button
+            // playlistCover.src = coverLink;
+
             //This will capitalize the first letter
-            var condition = data.charAt(0).toUpperCase() + data.slice(1);
+            var condition = arr[0].charAt(0).toUpperCase() + arr[0].slice(1);
 
             description.innerHTML = condition;
             weatherBox.style.display = '';
             weatherBox.classList.add('fadeIn');
             container.style.height = '700px';
         });
+}
+
+/**
+ * Function for the hyperlink
+ */
+function goToLink() {
+    window.open(link);
+}
+
+/**
+ * Function to parse recieved data
+ */
+function parse(data) {
+    //split the string by commas
+    return data.split(",");
 }
