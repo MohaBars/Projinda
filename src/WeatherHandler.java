@@ -49,11 +49,14 @@ public class WeatherHandler implements HttpHandler {
 
         int timeInt = Integer.parseInt(result[1]); // incorrect time by 2 hours.
         timeInt += 2; //Time in hours as an int between 0-23
+        String time = Integer.toString(timeInt);
+
+        String results2BeSent = weather + "," + time;
 
         t.getResponseHeaders().set("Content-Type", "text/plain");
-        t.sendResponseHeaders(200, weather.getBytes().length);
+        t.sendResponseHeaders(200, results2BeSent.getBytes().length);
         OutputStream os = t.getResponseBody();
-        os.write(weather.getBytes());
+        os.write(results2BeSent.getBytes());
         os.close();
     }
 }

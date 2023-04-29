@@ -17,7 +17,6 @@ body{
 .container{
     position: relative;
     width: 400px;
-    /* was 60 */
     height: 60px;
     background: #fff;
     padding: 28px 32px;
