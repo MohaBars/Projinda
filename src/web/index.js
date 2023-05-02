@@ -83,6 +83,12 @@ function searchWeather() {
                     sunContainer.style.display = 'block';
                     break;
 
+                //for haze/mist/fog we will reuse the sun container and change its colors
+                case arr[0].includes('haze' || 'mist' || 'fog'):
+                    sunContainer.style.display = 'none';
+                    sunContainer.style.background = 'linear-gradient(to bottom, #87CEEB, #DCDCDC)';
+                    break;
+                
                 default:
                     
             }
