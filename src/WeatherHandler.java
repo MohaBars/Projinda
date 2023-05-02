@@ -44,14 +44,18 @@ public class WeatherHandler implements HttpHandler {
         }
 
         OpenWeatherMapAPI openWeatherMapAPI = new OpenWeatherMapAPI();
+        SpotifyAPI spotify = new SpotifyAPI();
         String[] result = openWeatherMapAPI.weatherInformation(city);
         String weather = result[0];
+        String[] links = spotify.searchPlaylists(city);
+        String link = links[0];
+        String coverLink = links[1];
 
         int timeInt = Integer.parseInt(result[1]); // incorrect time by 2 hours.
         timeInt += 2; //Time in hours as an int between 0-23
         String time = Integer.toString(timeInt);
 
-        String results2BeSent = weather + "," + time;
+        String results2BeSent = weather + "," + time + "," + link + "," + coverLink;
 
         t.getResponseHeaders().set("Content-Type", "text/plain");
         t.sendResponseHeaders(200, results2BeSent.getBytes().length);

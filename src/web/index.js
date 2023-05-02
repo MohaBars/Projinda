@@ -6,7 +6,7 @@ const weatherBox = document.querySelector('.weather-box');
 const inputField = document.querySelector('.search-box input');
 const playlistButton = document.querySelector('.container .playlist');
 const playlistCover = document.querySelector('.container .playlist img');
-let link = "http://google.com";
+let link;
 let coverLink;
 
 //If search button is clicked, call the function searchWeather
@@ -94,11 +94,13 @@ function searchWeather() {
             }
 
             //change visibility of the playlist button
-            // playlistButton.style.display = 'inline-block';
+            playlistButton.style.display = 'inline-block';
+            //change the variable link to contain the actual playlist link
+            link = arr[2];
             //change the variable coverLink to contain the actual link
-            // coverLink = arr[2];
+            coverLink = arr[3];
             //change cover image of the button
-            // playlistCover.src = coverLink;
+            playlistCover.src = coverLink;
 
             //This will capitalize the first letter
             var condition = arr[0].charAt(0).toUpperCase() + arr[0].slice(1);
