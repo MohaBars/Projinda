@@ -4,8 +4,15 @@ const searchBox = document.querySelector('.search-box button');
 const notFound = document.querySelector('.not-found');
 const weatherBox = document.querySelector('.weather-box');
 const inputField = document.querySelector('.search-box input');
+const cloudsContainer = document.querySelector('.clouds-container');
+const sunContainer = document.querySelector('.sun-container');
+const rain1 = cloudsContainer.querySelector('.rain1');
+const rain2 = cloudsContainer.querySelector('.rain2');
+const snow1 = cloudsContainer.querySelector('.snow1');
+const snow2 = cloudsContainer.querySelector('.snow2');
 const playlistButton = document.querySelector('.container .playlist');
 const playlistCover = document.querySelector('.container .playlist img');
+
 let link = "http://google.com";
 let coverLink;
 
@@ -20,19 +27,26 @@ inputField.addEventListener('keypress', function(event) {
 });
 
 function searchWeather() {
-
     const city = inputField.value.toLowerCase();
-    var results;
+    const url = 'http://localhost:8080/weather?query=' + city; 
 
     if(city === ''){
         return;
     }
 
-    // hide the weather box
+    // Set all containers display to none
+    // By setting them to none we make sure that the page is cleared every time the button is clicked
     weatherBox.style.display = 'none';
+    cloudsContainer.style.display = 'none';
+    sunContainer.style.display = 'none';
+    rain1.style.display = 'none';
+    rain2.style.display = 'none';
+    snow1.style.display = 'none';
+    snow2.style.display = 'none';
 
-    //use fetch() method to send and recieve strings
-    fetch ('http://localhost:8080/weather?query=' + city)
+
+    //Using fetch() method to send and recieve strings
+    fetch (url)
         .then(response => response.text())
         .then(data => {
 
@@ -40,7 +54,7 @@ function searchWeather() {
             var arr = parse(data);
 
             //Handles the case where the city is not found
-            if(arr[0].includes('Error')){
+            if(arr[0].includes('400'||'404')){
                 container.style.height = '700px';
                 notFound.style.display = 'block';
                 notFound.classList.add('fadeIn');
@@ -56,30 +70,22 @@ function searchWeather() {
             //switch case to check the response
             switch (true){
                 case arr[0].includes('rain' || 'drizzle'):
-                    var cloudsContainer = document.querySelector('.clouds-container');
-                    var rain1 = cloudsContainer.querySelector('.rain1');
-                    var rain2 = cloudsContainer.querySelector('.rain2');
                     cloudsContainer.style.display = 'block';
                     rain1.style.display = 'flex';
                     rain2.style.display = 'flex';
                     break;
 
                 case arr[0].includes('clouds'):
-                    var cloudsContainer = document.querySelector('.clouds-container');
                     cloudsContainer.style.display = 'block';
                     break;
 
                 case arr[0].includes('snow'):
-                    var cloudsContainer = document.querySelector('.clouds-container');
-                    var snow1 = cloudsContainer.querySelector('.snow1');
-                    var snow2 = cloudsContainer.querySelector('.snow2');
                     cloudsContainer.style.display = 'block';
                     snow1.style.display = 'flex';
                     snow2.style.display = 'flex';
                     break;
 
                 case arr[0].includes('clear'):
-                    var sunContainer = document.querySelector('.sun-container');
                     sunContainer.style.display = 'block';
                     break;
 
@@ -103,10 +109,6 @@ function searchWeather() {
             // display the weather box again
             weatherBox.style.display = '';
             weatherBox.classList.add('fadeIn');
-
-            // Find the GIF element and set its source to the corresponding URL
-            var gifElem = document.querySelector('.weather-box .gif');
-            gifElem.src = `http://localhost:8080/gif?query=${condition}`;
         });
 }
 

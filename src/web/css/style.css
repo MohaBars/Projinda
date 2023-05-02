@@ -251,26 +251,6 @@ body{
     transform-origin: bottom;
 }
 
-.rain1 {
-    position: relative;
-    display: none;
-    z-index: 1;
-}
-
-.rain1 span {
-    position: relative;
-    bottom: 10px;
-    width: 2px;
-    height: 10px;
-    background: #0a9dff;
-    margin: 0 2px;
-    left: 50px;
-    border-radius: 0;
-    animation: animate 5s linear infinite;
-    animation-duration: calc(15s / var(--i));
-    transform-origin: bottom;
-}
-
 .snow2 {
     position: fixed;
     display: none;
@@ -287,6 +267,26 @@ body{
     background: #fff;
     margin: 0 2px;
     border-radius: 50%;
+    animation: animate 5s linear infinite;
+    animation-duration: calc(15s / var(--i));
+    transform-origin: bottom;
+}
+
+.rain1 {
+    position: relative;
+    display: none;
+    z-index: 1;
+}
+
+.rain1 span {
+    position: relative;
+    bottom: 10px;
+    width: 2px;
+    height: 10px;
+    background: #0a9dff;
+    margin: 0 2px;
+    left: 50px;
+    border-radius: 0;
     animation: animate 5s linear infinite;
     animation-duration: calc(15s / var(--i));
     transform-origin: bottom;
