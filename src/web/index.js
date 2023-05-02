@@ -20,6 +20,7 @@ inputField.addEventListener('keypress', function(event) {
 });
 
 function searchWeather() {
+
     const city = inputField.value.toLowerCase();
     var results;
 
@@ -35,8 +36,11 @@ function searchWeather() {
         .then(response => response.text())
         .then(data => {
 
+            //convert the data into an array
+            var arr = parse(data);
+
             //Handles the case where the city is not found
-            if(data.includes('Error')){
+            if(arr[0].includes('Error')){
                 container.style.height = '700px';
                 notFound.style.display = 'block';
                 notFound.classList.add('fadeIn');
@@ -51,7 +55,7 @@ function searchWeather() {
 
             //switch case to check the response
             switch (true){
-                case data.includes('rain' || 'drizzle'):
+                case arr[0].includes('rain' || 'drizzle'):
                     var cloudsContainer = document.querySelector('.clouds-container');
                     var rain1 = cloudsContainer.querySelector('.rain1');
                     var rain2 = cloudsContainer.querySelector('.rain2');
@@ -60,12 +64,12 @@ function searchWeather() {
                     rain2.style.display = 'flex';
                     break;
 
-                case data.includes('clouds'):
+                case arr[0].includes('clouds'):
                     var cloudsContainer = document.querySelector('.clouds-container');
                     cloudsContainer.style.display = 'block';
                     break;
 
-                case data.includes('snow'):
+                case arr[0].includes('snow'):
                     var cloudsContainer = document.querySelector('.clouds-container');
                     var snow1 = cloudsContainer.querySelector('.snow1');
                     var snow2 = cloudsContainer.querySelector('.snow2');
@@ -74,7 +78,7 @@ function searchWeather() {
                     snow2.style.display = 'flex';
                     break;
 
-                case data.includes('clear'):
+                case arr[0].includes('clear'):
                     var sunContainer = document.querySelector('.sun-container');
                     sunContainer.style.display = 'block';
                     break;
@@ -83,11 +87,8 @@ function searchWeather() {
                     
             }
 
-            //convert the data into an array
-            var arr = parse(data);
-
             //change visibility of the playlist button
-            playlistButton.style.display = 'inline-block';
+            // playlistButton.style.display = 'inline-block';
             //change the variable coverLink to contain the actual link
             // coverLink = arr[2];
             //change cover image of the button
