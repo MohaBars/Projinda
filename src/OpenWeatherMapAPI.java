@@ -12,8 +12,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * This class is used to get the current weather information about a specified place. 
- * The resulting weather from each call with a city to OpenWeatherMapAPI will be stored in the class field "apiWeather"
+ * This class is used to get the current weather information and time of day about a specified place. 
+ * The resulting weather and time from each call to OpenWeatherMapAPI will be stored in the array "apiInformation",
  */
 public class OpenWeatherMapAPI {
     private String apiKey = "8257206a615b0b55accb2cf9cce30db0";
@@ -66,6 +66,14 @@ public class OpenWeatherMapAPI {
         return apiInformation;
     }
 
+    /**
+     * Conversion of time from output weatherAPI to just hold the hour of day. The hour will then decide if its night or day.
+     * 
+     * @param unixTime The output of current time from weatherAPI
+     * @param timeZone The timezone of the city used as input to weather API.
+     * 
+     * @return The time of day in a 24 hour clock, excluding minutes and seconds.
+     */
     private String convertUnixToTime(long unixTime, String timeZone) {
         Date date = new Date(unixTime * 1000L); // Convert Unix time to Java Date object
         SimpleDateFormat sdf = new SimpleDateFormat("HH"); // Use "HH" format to get hour in 24-hour clock format
