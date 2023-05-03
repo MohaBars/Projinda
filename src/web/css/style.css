@@ -14,6 +14,7 @@ body{
     background: #4f0043;
 }
 
+/*Styling the main container*/
 .container{
     position: relative;
     width: 400px;
@@ -36,6 +37,7 @@ body{
     margin-top: -18px;
 }
 
+/* styling the search box input */
 .search-box input{
     color: #4f0043;
     width: 80%;
@@ -51,6 +53,7 @@ body{
     text-transform: capitalize;
 }
 
+/* styling the search button */
 .search-box button{
     cursor: pointer;
     width: 50px;
@@ -78,7 +81,7 @@ body{
     font-size: 56px;
     font-weight: 500;
 }
-
+/* styling the container of the case where and error happen */
 .not-found{
     width: 100%;
     text-align: center;
@@ -88,12 +91,13 @@ body{
     display: none;
 }
 
-/* The image's size has to be set like this or else it would be too big */
+/* The image's size has to be set like this or else it would be too big and fill the screen */
 .not-found img{
     width: 70%;
     height: 100%;
 }
 
+/* styling for the text */
 .not-found p{
     color: #4f0043;
     font-size: 22px;
@@ -106,6 +110,7 @@ body{
     opacity: 0;
 }
 
+/* styling the container for of the playlist */
 .playlist {
     border: none;
     background: linear-gradient(to bottom, black, green);
@@ -113,7 +118,7 @@ body{
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    /* display inline-block */
+    /* display changes to inline-block in js */
     display: none;
     font-size: 16px;
     margin: 4px 2px;
@@ -125,11 +130,12 @@ body{
     margin-top: 300px;
     transition: transform 0.3s ease-in-out;
 }
-
+/* styling for when the user hovers their mouse on the button */
 .playlist:hover {
     transform: translateY(-10px);
 }
 
+/* animation to be used on the weather box */
 .fadeIn{
     animation: 0.5s fadeIn forwards;
     animation-delay: 0.5s;
@@ -153,6 +159,7 @@ body{
     z-index: -1;
 }
 
+/* styling of the sun itself which will be a yellow circle */
 .sun {
     position: absolute;
     top: 20px;
@@ -164,6 +171,7 @@ body{
     animation: sunAnimation 3s linear infinite;
 }
 
+/* animation for the sun where it bounces up and down */
 @keyframes sunAnimation {
     0% {
         transform: translate(-50%, 0%) rotate(0deg);
@@ -208,6 +216,7 @@ body{
     right: 0;
 }
 
+/* this will be used to create a pseudo "cloud1" which will help create the cloud shape */
 .cloud1::before {
     content: '';
     position: absolute;
@@ -232,12 +241,14 @@ body{
     box-shadow: 90px 0 0 30px #e6e6e6;
 }
 
+/* this snow container is inside cloud1 */
 .snow1 {
     position: relative;
     display: none;
     z-index: 1;
 }
 
+/* styling for each individual snow flake */
 .snow1 span {
     position: relative;
     bottom: 10px;
@@ -251,6 +262,7 @@ body{
     transform-origin: bottom;
 }
 
+/* this snow container is inside cloud2 */
 .snow2 {
     position: fixed;
     display: none;
@@ -272,6 +284,7 @@ body{
     transform-origin: bottom;
 }
 
+/* this rain container is inside cloud1 */
 .rain1 {
     position: relative;
     display: none;
@@ -292,6 +305,7 @@ body{
     transform-origin: bottom;
 }
 
+/* this rain container is inside cloud2 */
 .rain2 {
     position: fixed;
     display: none;
@@ -314,6 +328,7 @@ body{
     transform-origin: bottom;
 }
 
+/* animation for dropping rain and snow */
 @keyframes animate {
     0% {
         transform: translateY(0) scale(1);

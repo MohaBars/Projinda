@@ -12,10 +12,14 @@
     </head>
 
     <body>
+        <!-- Main container -->
         <div class="container">
 
+            <!-- search box -->
             <div class="search-box">
+                <!-- this will be the user input -->
                 <input type="text" placeholder="Type your location">
+                <!-- this is the search button -->
                 <button class="button wi wi-direction-right">
                 </button>
             </div>
@@ -26,17 +30,21 @@
                 <p>Oops! Location was not found :/</p>
             </div>
 
+            <!-- container where information will be displayed -->
             <div class="weather-box">
+                <!-- description of the weather -->
                 <p class="description"></p>
             </div>
 
+            <!-- button for the playlist -->
+            <!-- it will also use the function "goToLink" which is defined in index.js -->
             <button class="playlist" onclick="goToLink()">
                 <img src="">
             </button>
 
         </div>
 
-        <!-- Container for animating clear weather -->
+        <!-- Container for animating weather -->
         <div class="sun-container">
             <div class="sun"></div>
         </div>

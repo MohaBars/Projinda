@@ -6,13 +6,13 @@ const weatherBox = document.querySelector('.weather-box');
 const inputField = document.querySelector('.search-box input');
 const cloudsContainer = document.querySelector('.clouds-container');
 const sunContainer = document.querySelector('.sun-container');
+const sun = document.querySelector('.sun-container .sun')
 const rain1 = cloudsContainer.querySelector('.rain1');
 const rain2 = cloudsContainer.querySelector('.rain2');
 const snow1 = cloudsContainer.querySelector('.snow1');
 const snow2 = cloudsContainer.querySelector('.snow2');
 const playlistButton = document.querySelector('.container .playlist');
 const playlistCover = document.querySelector('.container .playlist img');
-
 let link;
 let coverLink;
 
@@ -27,9 +27,11 @@ inputField.addEventListener('keypress', function(event) {
 });
 
 function searchWeather() {
+    //Get the city from the input
     const city = inputField.value.toLowerCase();
     const url = 'http://localhost:8080/weather?query=' + city; 
 
+    //if the input is empty, return
     if(city === ''){
         return;
     }
@@ -49,22 +51,22 @@ function searchWeather() {
     fetch (url)
         .then(response => response.text())
         .then(data => {
-
             //convert the data into an array
             var arr = parse(data);
 
             //Handles the case where the city is not found
             if(arr[0].includes('400'||'404')){
+                //Set the container height to 700px display the notFound element with the fadeIn animation
                 container.style.height = '700px';
                 notFound.style.display = 'block';
                 notFound.classList.add('fadeIn');
                 return;
             }
-
             //Otherwise the error image will not be displayed
             notFound.style.display = 'none';
             notFound.classList.remove('fadeIn');
 
+            //Get the description element and store in the variable "description"
             const description = document.querySelector('.weather-box .description');
 
             //switch case to check the response
@@ -89,9 +91,11 @@ function searchWeather() {
                     sunContainer.style.display = 'block';
                     break;
 
-                //for haze/mist/fog we will reuse the sun container and change its colors
+                //for haze/mist/fog we will reuse the sun container and change its colors, also, we will keep the sun hidden
                 case arr[0].includes('haze' || 'mist' || 'fog'):
-                    sunContainer.style.display = 'none';
+                    sunContainer.style.display = 'block';
+                    sun.style.display = 'none';
+                    //Change the background color to a gradient of blue and grey
                     sunContainer.style.background = 'linear-gradient(to bottom, #87CEEB, #DCDCDC)';
                     break;
                 
@@ -111,6 +115,7 @@ function searchWeather() {
             //This will capitalize the first letter
             var condition = arr[0].charAt(0).toUpperCase() + arr[0].slice(1);
 
+            // display the weather condition
             description.innerHTML = condition;
             container.style.height = '700px';
 
