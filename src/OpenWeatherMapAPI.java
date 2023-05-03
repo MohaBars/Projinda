@@ -72,12 +72,4 @@ public class OpenWeatherMapAPI {
         sdf.setTimeZone(TimeZone.getTimeZone(timeZone)); // Set the time zone
         return sdf.format(date); // Return the hour part of the time as a string
     }
-
-    // public static void main(String[] args) {
-    //     OpenWeatherMapAPI weather = new OpenWeatherMapAPI();
-    //     String[] arr = weather.weatherInformation("stockholm");
-    //     System.out.println(arr[0]);
-    //     System.out.println(arr[1]);
-
-    // }
 }
