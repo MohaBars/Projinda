@@ -73,12 +73,14 @@ public class SpotifyAPI {
             JSONObject jsonObject = new JSONObject(content.toString());
             JSONArray playlists = jsonObject.getJSONObject("playlists").getJSONArray("items");
             int playlistCount = playlists.length();
-            playlistUrls = new String[playlistCount];
+            playlistUrls = new String[playlistCount * 2];
 
             for (int i = 0; i < playlistCount; i++) {
                 JSONObject playlist = playlists.getJSONObject(i);
                 String playlistUrl = playlist.getJSONObject("external_urls").getString("spotify");
-                playlistUrls[i] = playlistUrl;
+                String artworkUrl = playlist.getJSONObject("images").getJSONArray("url").getString(0);
+                playlistUrls[i * 2] = playlistUrl;
+                playlistUrls[i * 2 + 1] = artworkUrl;
             }
 
         } catch (IOException e) {
@@ -88,3 +90,4 @@ public class SpotifyAPI {
         return playlistUrls;
     }
 }
+
