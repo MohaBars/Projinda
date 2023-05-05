@@ -72,6 +72,7 @@ public class SpotifyAPI {
             in.close();
             connection.disconnect();
 
+
             String jsonString = content.toString();
 
             Pattern playlistPattern = Pattern.compile("\"spotify\"\\s*:\\s*\"(https://open\\.spotify\\.com/playlist/[^\"]+)\"");
@@ -86,6 +87,7 @@ public class SpotifyAPI {
 
             if (artworkMatcher.find()) {
                 playlistData[1] = artworkMatcher.group(1);
+
             }
 
         } catch (IOException e) {
@@ -95,3 +97,4 @@ public class SpotifyAPI {
         return playlistData;
     }
 }
+
