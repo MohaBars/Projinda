@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SpotifyAPI {
     private String clientId = "4528c15345444a0e867580331f178e08";
@@ -49,12 +51,12 @@ public class SpotifyAPI {
         return null;
     }
 
-    public String[] searchPlaylists(String apiWeather) {
-        String query = apiWeather + " playlist";
-        String[] playlistUrls = null;
+    public String[] searchPlaylist(String apiWeather) {
+        String query = apiWeather.replace(" ", "%20") + "%20playlist";
+        String[] playlistData = new String[2];
 
         try {
-            URL url = new URL("https://api.spotify.com/v1/search?q=" + query + "&type=playlist&limit=10");
+            URL url = new URL("https://api.spotify.com/v1/search?q=" + query + "&type=playlist&limit=1");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
@@ -70,21 +72,26 @@ public class SpotifyAPI {
             in.close();
             connection.disconnect();
 
-            JSONObject jsonObject = new JSONObject(content.toString());
-            JSONArray playlists = jsonObject.getJSONObject("playlists").getJSONArray("items");
-            int playlistCount = playlists.length();
-            playlistUrls = new String[playlistCount];
+            String jsonString = content.toString();
 
-            for (int i = 0; i < playlistCount; i++) {
-                JSONObject playlist = playlists.getJSONObject(i);
-                String playlistUrl = playlist.getJSONObject("external_urls").getString("spotify");
-                playlistUrls[i] = playlistUrl;
+            Pattern playlistPattern = Pattern.compile("\"spotify\"\\s*:\\s*\"(https://open\\.spotify\\.com/playlist/[^\"]+)\"");
+            Matcher playlistMatcher = playlistPattern.matcher(jsonString);
+
+            if (playlistMatcher.find()) {
+                playlistData[0] = playlistMatcher.group(1);
+            }
+
+            Pattern artworkPattern = Pattern.compile("\"images\"\\s*:\\s*\\[\\s*\\{[^\\}]*\"url\"\\s*:\\s*\"([^\"]+)\"");
+            Matcher artworkMatcher = artworkPattern.matcher(jsonString);
+
+            if (artworkMatcher.find()) {
+                playlistData[1] = artworkMatcher.group(1);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return playlistUrls;
+        return playlistData;
     }
 }
