@@ -37,8 +37,8 @@ public class WeatherHandler implements HttpHandler {
             String[] queryParams = query.split("&");
             for (String param : queryParams) {
                 String[] keyValue = param.split("=");
-                if (keyValue.length == 2 && keyValue[0].equals("query")) { // Update to "query" instead of "city"
-                    city = keyValue[1];
+                if (keyValue.length == 2 && keyValue[0].equals("query")) {
+                    city = keyValue[1].replace(" ", "%20"); // Replace spaces with %20
                     break;
                 }
             }
@@ -51,7 +51,7 @@ public class WeatherHandler implements HttpHandler {
 
         // Uses the output weather desciption to search for a playlist of that name
         SpotifyAPI spotify = new SpotifyAPI();
-        String[] links = spotify.searchPlaylists(weather);
+        String[] links = spotify.searchPlaylist(weather);
         String link = links[0];
         String coverLink = links[1];
 
