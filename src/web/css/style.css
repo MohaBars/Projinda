@@ -130,9 +130,25 @@ body{
     margin-top: 300px;
     transition: transform 0.3s ease-in-out;
 }
+
 /* styling for when the user hovers their mouse on the button */
 .playlist:hover {
     transform: translateY(-10px);
+}
+
+/* styling for the artwork inside the button */
+.playlist img {
+    position: relative;
+    width: 300px;
+    height: 100px;
+    opacity: 1;
+    object-fit: cover;
+    border-radius: inherit;
+    top: -10px;
+    left: -20px;
+    /* this maske will make the cover image appear to be fading from top to bottom */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 
 /* animation to be used on the weather box */
