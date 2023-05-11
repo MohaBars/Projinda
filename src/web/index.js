@@ -45,6 +45,7 @@ function searchWeather() {
     rain2.style.display = 'none';
     snow1.style.display = 'none';
     snow2.style.display = 'none';
+    playlistButton.style.display = 'none';
 
 
     //Using fetch() method to send and recieve strings
@@ -52,10 +53,12 @@ function searchWeather() {
         .then(response => response.text())
         .then(data => {
             //convert the data into an array
-            var arr = parse(data);
+            var results = parse(data);
+            //get the time and convert it into an integer
+            var time = parseInt(results[1]);
 
             //Handles the case where the city is not found
-            if(arr[0].includes('400'||'404')){
+            if(results[0].includes('400'||'404')){
                 //Set the container height to 700px display the notFound element with the fadeIn animation
                 container.style.height = '700px';
                 notFound.style.display = 'block';
@@ -71,32 +74,53 @@ function searchWeather() {
 
             //switch case to check the response
             switch (true){
-                case arr[0].includes('rain' || 'drizzle'):
+                case results[0].includes('rain' || 'drizzle'):
                     cloudsContainer.style.display = 'block';
                     rain1.style.display = 'flex';
                     rain2.style.display = 'flex';
+                    //If it's during nighttime, the background color will be changed to grey-ish dark blue
+                    if(time >= 19 || time <= 6) {
+                        cloudsContainer.style.backgroundColor = '#2B2D42';
+                    }
                     break;
 
-                case arr[0].includes('clouds'):
+                case results[0].includes('clouds'):
                     cloudsContainer.style.display = 'block';
+                    //If it's during nighttime, the background color will be changed
+                    if(time >= 19 || time <= 6) {
+                        cloudsContainer.style.backgroundColor = '#2B2D42';
+                    }
                     break;
 
-                case arr[0].includes('snow'):
+                case results[0].includes('snow'):
                     cloudsContainer.style.display = 'block';
                     snow1.style.display = 'flex';
                     snow2.style.display = 'flex';
+                    //If it's during nighttime, the background color will be changed
+                    if(time >= 19 || time <= 6) {
+                        cloudsContainer.style.backgroundColor = '#2B2D42';
+                    }
                     break;
 
-                case arr[0].includes('clear'):
+                case results[0].includes('clear'):
                     sunContainer.style.display = 'block';
+                    //If it's during nighttime, the background color will be changed and the sun will become a moon by changing its color
+                    if(time >= 19 || time <= 6) {
+                        sunContainer.style.backgroundColor = '#2B2D42';
+                        sun.style.backgroundColor = '#DCDCDC';
+                    }
                     break;
 
                 //for haze/mist/fog we will reuse the sun container and change its colors, also, we will keep the sun hidden
-                case arr[0].includes('haze' || 'mist' || 'fog'):
+                case results[0].includes('haze' || 'mist' || 'fog'):
                     sunContainer.style.display = 'block';
                     sun.style.display = 'none';
                     //Change the background color to a gradient of blue and grey
-                    sunContainer.style.background = 'linear-gradient(to bottom, #87CEEB, #DCDCDC)';
+                    sunContainer.style.background = 'linear-gradient(to bottom, #87CEEB, #D8DBE2)';
+                    //If it's during nighttime, the background color will be changed
+                    if(time >= 19 || time <= 6) {
+                        sunContainer.style.background = 'linear-gradient(to bottom, ##2B2D42, #D8DBE2)';
+                    }
                     break;
                 
                 default:
@@ -106,14 +130,14 @@ function searchWeather() {
             //change visibility of the playlist button
             playlistButton.style.display = 'inline-block';
             //change the variable link to contain the actual playlist link
-            link = arr[2];
+            link = results[2];
             //change the variable coverLink to contain the actual link
-            coverLink = arr[3];
+            coverLink = results[3];
             //change cover image of the button
             playlistCover.src = coverLink;
 
             //This will capitalize the first letter
-            var condition = arr[0].charAt(0).toUpperCase() + arr[0].slice(1);
+            var condition = results[0].charAt(0).toUpperCase() + results[0].slice(1);
 
             // display the weather condition
             description.innerHTML = condition;

@@ -12,11 +12,14 @@ import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The SpotifyAPI class provides functionality to interact with the Spotify API,
+ * including obtaining an access token and performing playlist searches.
+ */
 public class SpotifyAPI {
     private String clientId = "4528c15345444a0e867580331f178e08";
     private String clientSecret = "e7fa7fd60a4b4624883614601b2f1fdc";
     private String accessToken;
-
 
     /**
      * Constructor for the SpotifyAPI class.
@@ -111,7 +114,6 @@ public class SpotifyAPI {
                 // Store the playlist URL in the playlistData array
                 playlistData[0] = playlistMatcher.group(1);
             }
-
             // Extract the artwork URL using a regular expression
             Pattern artworkPattern = Pattern.compile("\"images\"\\s*:\\s*\\[\\s*\\{[^\\}]*\"url\"\\s*:\\s*\"([^\"]+)\"");
             Matcher artworkMatcher = artworkPattern.matcher(jsonString);
@@ -119,13 +121,10 @@ public class SpotifyAPI {
             if (artworkMatcher.find()) {
                 // Store the artwork URL in the playlistData array
                 playlistData[1] = artworkMatcher.group(1);
-
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return playlistData;
     }
 }
