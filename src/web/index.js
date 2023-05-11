@@ -31,6 +31,10 @@ function searchWeather() {
     const city = inputField.value.toLowerCase();
     const url = 'http://localhost:8080/weather?query=' + city; 
 
+    //Create a variable to story the city with the first letter capitalized
+    let cityCap = city.charAt(0).toUpperCase() + city.slice(1);
+    //Create a variable to store the message that will appear to the user
+    let message = "Want to get into " + cityCap + "'s mode? Enjoy listening to this playlist on Spotify!"
     //if the input is empty, return
     if(city === ''){
         return;
@@ -140,7 +144,9 @@ function searchWeather() {
             var condition = results[0].charAt(0).toUpperCase() + results[0].slice(1);
 
             // display the weather condition
-            description.innerHTML = condition;
+            // <br> is used for line break
+            // we will also make the font of the condition bigger than the message for aesthetics
+            description.innerHTML = "<span style='font-size:56px'>" + condition + "</span>" + "<br><br><br><br><br><br><br>" + message;
             container.style.height = '700px';
 
             // display the weather box again
