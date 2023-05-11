@@ -139,3 +139,21 @@ function parse(data) {
     //split the string by commas
     return data.split(",");
 }
+
+$(function() {
+    $("#citySearch").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "http://gd.geobytes.com/AutoCompleteCity",
+                dataType: "jsonp",
+                data: {
+                    q: request.term
+                },
+                success: function(data) {
+                    response(data);
+                }
+            });
+        },
+        minLength: 3,
+    });
+});
